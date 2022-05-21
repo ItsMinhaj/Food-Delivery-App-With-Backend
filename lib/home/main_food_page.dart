@@ -52,7 +52,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
               ],
             ),
           ),
-          FoodPageBody(),
+          const FoodPageBody(),
         ],
       ),
     );
