@@ -53,7 +53,11 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                   child: Row(
                     children: [
                       SmallText(text: "Show more", color: AppColors.mainColor),
-                      Icon(Icons.arrow_drop_down, color: AppColors.mainColor),
+                      Icon(
+                          hiddenText
+                              ? Icons.arrow_drop_down
+                              : Icons.arrow_drop_up,
+                          color: AppColors.mainColor),
                     ],
                   ),
                 ),

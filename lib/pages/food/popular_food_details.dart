@@ -1,3 +1,4 @@
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utlis/dimensions.dart';
 import 'package:food_delivery/widgets/expandable_text.dart';
@@ -103,9 +104,27 @@ class PopularFoodDetails extends StatelessWidget {
                   ),
                   SizedBox(height: Dimensions.height30),
                   BigText(text: "Introduce"),
-                  ExpandableTextWidget(
-                      text:
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim vitae ex quis pretium. Aliquam erat volutpat. Curabitur a nisi vel mi condimentum condimentum. Maecenas vitae libero id nibh luctus pellentesque ac aliquam ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at eros a nisi ullamcorper eleifend ac ut leo. Nam aliquam vulputate bibendum...")
+                  SizedBox(height: Dimensions.height20),
+                  // Expandable Text widget
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpandableText(
+                        '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim vitae ex quis pretium. Aliquam erat volutpat. Curabitur a nisi vel mi condimentum condimentum. Maecenas vitae libero id nibh luctus pellentesque ac aliquam ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at eros a nisi ullamcorper eleifend ac ut leo. Nam aliquam vulputate bibendum.
+                    
+                    Nam congue velit id risus dapibus suscipit. Etiam pulvinar ultrices pellentesque. Vestibulum ut ante libero. Nulla dui quam, sollicitudin nec metus et, tristique porta urna. Morbi pulvinar elit eu dolor semper, ac dictum odio aliquam. Etiam condimentum vestibulum est. Maecenas suscipit leo dui, ac dictum est tristique et. Mauris condimentum consequat diam eget aliquet.
+                    
+                    Vivamus lacinia vitae tortor vel vestibulum. Aliquam ut orci volutpat, vulputate dui at, laoreet neque. Quisque dictum odio nec ipsum blandit iaculis. In in facilisis tellus, ac porttitor quam. Maecenas nec quam gravida ligula tincidunt volutpat ultricies sed ex. Maecenas non laoreet quam, id venenatis neque. Cras gravida ipsum sed porta consequat. Fusce aliquet sapien ac gravida iaculis. Ut sem purus, rhoncus nec tincidunt ac, ornare eget lectus. Etiam in nunc sit amet tellus fringilla hendrerit. Nunc tincidunt odio non nulla lacinia, et consequat ligula pretium.''',
+                        style: TextStyle(color: AppColors.textColor),
+                        expandText: 'show more',
+                        collapseText: 'show less',
+                        maxLines: 3,
+                        linkColor: AppColors.mainColor,
+                      ),
+                    ),
+                  )
+                  // const ExpandableTextWidget(
+                  //     text:
+                  //         "Lorem ipsum dolor sit amet, consectetur adsffffffffffffffff asdfsadf adipiscing elit. Donec dignissim vitae ex quis pretium. Aliquam erat volutpat. Curabitur a nisi vel mi condimentum condimentum. Maecenas vitae libero id nibh luctus pellentesque ac aliquam ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at eros a nisi ullamcorper eleifend ac ut leo. Nam aliquam vulputate bibendum...")
                 ],
               ),
             ),
