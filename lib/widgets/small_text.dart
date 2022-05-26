@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SmallText extends StatelessWidget {
-  Color? color;
+  final Color color;
   final String text;
-  double size;
-  double height;
+  final double size;
+  final double height;
 
-  SmallText(
+  const SmallText(
       {Key? key,
       this.color = const Color(0xFF5c524f),
       required this.text,

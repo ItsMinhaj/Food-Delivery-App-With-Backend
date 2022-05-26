@@ -122,9 +122,6 @@ class PopularFoodDetails extends StatelessWidget {
                       ),
                     ),
                   )
-                  // const ExpandableTextWidget(
-                  //     text:
-                  //         "Lorem ipsum dolor sit amet, consectetur adsffffffffffffffff asdfsadf adipiscing elit. Donec dignissim vitae ex quis pretium. Aliquam erat volutpat. Curabitur a nisi vel mi condimentum condimentum. Maecenas vitae libero id nibh luctus pellentesque ac aliquam ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at eros a nisi ullamcorper eleifend ac ut leo. Nam aliquam vulputate bibendum...")
                 ],
               ),
             ),
