@@ -1,7 +1,4 @@
-// ignore_for_file: sort_child_properties_last
-
 import 'package:flutter/material.dart';
-import 'package:food_delivery/services/services.dart';
 import 'package:food_delivery/utlis/colors.dart';
 import 'package:food_delivery/utlis/dimensions.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
@@ -138,9 +135,6 @@ class RecommendFoodDetails extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Services.PopularFood();
-      }),
     );
   }
 }

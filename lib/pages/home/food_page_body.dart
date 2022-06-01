@@ -81,6 +81,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           height: 600,
           child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               itemCount: 5,
               itemBuilder: (context, index) {
                 return Container(
@@ -92,8 +93,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
                       Container(
                         margin: EdgeInsets.only(bottom: Dimensions.height10),
-                        height: Dimensions.height120,
-                        width: Dimensions.width120,
+                        height: Dimensions.height100,
+                        width: Dimensions.width45 * 2,
                         decoration: const BoxDecoration(
                           color: Colors.white38,
                           image: DecorationImage(
@@ -122,7 +123,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              BigText(text: "Nutritious fruit meal in china"),
+                              BigText(text: "Chinese Side"),
                               SizedBox(height: Dimensions.height10),
                               SmallText(
                                 text: "With chinese characteristics",
@@ -158,7 +159,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ),
                 );
               }),
-        )
+        ),
       ],
     );
   }
@@ -206,7 +207,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ? const Color(0XFF69c5df)
                 : const Color(0XFF9294cd),
             image: const DecorationImage(
-              image: AssetImage("assets/images/food0.png"),
+              image: AssetImage("assets/images/food1.png"),
             ),
           ),
         ),

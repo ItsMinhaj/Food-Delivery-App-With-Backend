@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/utlis/dimensions.dart';
 import 'package:food_delivery/widgets/small_text.dart';
 
 class IconAndText extends StatelessWidget {
@@ -19,7 +20,7 @@ class IconAndText extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: iconColor),
-        const SizedBox(width: 4),
+        SizedBox(width: Dimensions.width05 - 1),
         SmallText(text: text, color: color),
       ],
     );
