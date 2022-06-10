@@ -1,64 +1,81 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/routes/routes_helper.dart';
+import 'package:food_delivery/utlis/app_constants.dart';
 import 'package:food_delivery/utlis/colors.dart';
 import 'package:food_delivery/utlis/dimensions.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/big_text.dart';
+import 'package:get/get.dart';
 
 class RecommendFoodDetails extends StatelessWidget {
-  const RecommendFoodDetails({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendFoodDetails({Key? key, required this.pageId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             backgroundColor: AppColors.yellowColor,
+            automaticallyImplyLeading: false,
             pinned: true,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                AppIcon(
-                  icon: Icons.clear,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.initail);
+                  },
+                  child: const AppIcon(
+                    icon: Icons.clear,
+                  ),
                 ),
-                AppIcon(icon: Icons.shopping_cart_outlined)
+                const AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
             bottom: PreferredSize(
+                // Header Icon section
                 child: Container(
                   padding: EdgeInsets.only(bottom: Dimensions.height15 / 3),
                   width: double.maxFinite,
                   child: Center(
-                      child: BigText(
-                          text: "Chinese side", size: Dimensions.text26)),
+                      child:
+                          BigText(text: product.name, size: Dimensions.text26)),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
                 ),
                 preferredSize: Size.fromHeight(Dimensions.height24)),
             expandedHeight: 300,
+            // Recommended Image Section
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/food0.png",
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOAD_URI + product.img,
                 fit: BoxFit.cover,
               ),
             ),
           ),
+          // Recommended Description
           SliverToBoxAdapter(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: Dimensions.width20),
-              child: const Text(
-                '''"Sed ut perspiciatis unde omnis iste 
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-              natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?''',
-                style: TextStyle(height: 1.8),
+              child: Text(
+                product.description,
+                style: const TextStyle(height: 1.8, color: Colors.black38),
               ),
             ),
           ),
         ],
       ),
+      // Bottom Navigationbar
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -72,7 +89,8 @@ class RecommendFoodDetails extends StatelessWidget {
                   backgroundColor: AppColors.mainColor,
                   iconColor: Colors.white,
                 ),
-                BigText(text: "\$12.88  X  0", size: Dimensions.text26),
+                BigText(
+                    text: "\$ ${product.price}  X  0", size: Dimensions.text26),
                 AppIcon(
                   icon: Icons.add,
                   backgroundColor: AppColors.mainColor,

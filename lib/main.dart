@@ -3,6 +3,7 @@ import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/helper/dependencies.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
+import 'package:food_delivery/routes/routes_helper.dart';
 import 'package:get/get.dart';
 
 void main() async {
@@ -26,6 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      initialRoute: RouteHelper.initail,
+      getPages: RouteHelper.routes,
       home: const MainFoodPage(),
     );
   }

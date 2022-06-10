@@ -1,7 +1,10 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/popular_product_controller.dart';
+import 'package:food_delivery/pages/home/main_food_page.dart';
+import 'package:food_delivery/utlis/app_constants.dart';
 import 'package:food_delivery/utlis/dimensions.dart';
-import 'package:food_delivery/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 import '../../utlis/colors.dart';
 import '../../widgets/app_icon.dart';
@@ -10,10 +13,14 @@ import '../../widgets/icon_and_text_widget.dart';
 import '../../widgets/small_text.dart';
 
 class PopularFoodDetails extends StatelessWidget {
-  const PopularFoodDetails({Key? key}) : super(key: key);
+  final int pageId;
+  const PopularFoodDetails({required this.pageId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+
     return Scaffold(
       body: Stack(
         children: [
@@ -24,23 +31,30 @@ class PopularFoodDetails extends StatelessWidget {
             child: Container(
               height: Dimensions.poplularFoodImageHeight,
               width: double.maxFinite,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/food0.png"),
+                    image: NetworkImage(AppConstants.BASE_URL +
+                        AppConstants.UPLOAD_URI +
+                        product.img),
                     fit: BoxFit.cover),
               ),
             ),
           ),
           // App Icon
           Positioned(
-            top: Dimensions.height15,
+            top: Dimensions.height30,
             left: Dimensions.width20,
             right: Dimensions.width20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                AppIcon(icon: Icons.arrow_back_ios),
-                AppIcon(icon: Icons.shopping_cart_outlined),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(const MainFoodPage());
+                  },
+                  child: const AppIcon(icon: Icons.arrow_back_ios),
+                ),
+                const AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
           ),
@@ -63,7 +77,7 @@ class PopularFoodDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BigText(text: "Chinese Side", size: Dimensions.text26),
+                  BigText(text: product.name, size: Dimensions.text26),
                   SizedBox(height: Dimensions.height10),
                   Row(
                     children: [
@@ -74,11 +88,11 @@ class PopularFoodDetails extends StatelessWidget {
                                   color: AppColors.mainColor,
                                   size: Dimensions.height15))),
                       SizedBox(width: Dimensions.width10),
-                      SmallText(text: "4.6"),
+                      const SmallText(text: "4.6"),
                       SizedBox(width: Dimensions.width10),
-                      SmallText(text: "1287"),
+                      const SmallText(text: "1287"),
                       SizedBox(width: Dimensions.width10),
-                      SmallText(text: "comments"),
+                      const SmallText(text: "comments"),
                     ],
                   ),
                   SizedBox(height: Dimensions.height20),
@@ -174,7 +188,9 @@ class PopularFoodDetails extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimensions.radius20)),
                 child: Row(
                   children: [
-                    BigText(text: "\$10 | Add to cart", color: Colors.white),
+                    BigText(
+                        text: "\$ ${product.price} | Add to cart",
+                        color: Colors.white),
                   ],
                 ),
               )
