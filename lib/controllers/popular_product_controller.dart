@@ -45,7 +45,7 @@ class PopularProductController extends GetxController {
   }
 
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((_inCartItems + quantity) < 0) {
       Get.snackbar("Order Summary", "",
           messageText: const Text(
             "You can,t reduce more!",
@@ -54,7 +54,7 @@ class PopularProductController extends GetxController {
       return 0;
     }
     //A single customer can't be ordered more than 20 at a time.
-    else if (quantity > 20) {
+    else if ((_inCartItems + quantity) > 20) {
       Get.snackbar("Order Summary", "",
           messageText: const Text(
             "Your order limit is exceeded!",
@@ -66,13 +66,36 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct(CartController cart) {
+  void initProduct(ProductsModel product, CartController cart) {
     _quantity = 0;
     _inCartItems = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.existInCart(product);
+    //if exist
+    //get from storage _inCartItems = 3
+    debugPrint("exist or not $exist");
+    if (exist) {
+      _inCartItems = _cart.getQuantity(product);
+    }
+    debugPrint("The quantity in the cart is $_inCartItems");
   }
 
   void addItem(ProductsModel productsModel) {
     _cart.addItem(productsModel, _quantity);
+
+    _quantity = 0;
+    _inCartItems = _cart.getQuantity(productsModel);
+
+    _cart.items.forEach(
+      (key, value) {
+        debugPrint("The id is ${value.id}The quantity is ${value.quantity}");
+      },
+    );
+    update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }
