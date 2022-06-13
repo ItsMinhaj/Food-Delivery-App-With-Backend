@@ -67,7 +67,7 @@ class PopularFoodDetails extends StatelessWidget {
                                 top: 0,
                                 child: AppIcon(
                                   icon: Icons.circle,
-                                  size: 20,
+                                  size: 18,
                                   iconColor: Colors.transparent,
                                   backgroundColor: Colors.red,
                                 ),
