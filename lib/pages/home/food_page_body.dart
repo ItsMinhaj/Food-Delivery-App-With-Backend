@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
+import 'package:food_delivery/controllers/recommended_cart_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/model/popular_product_model.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
@@ -43,6 +44,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         // Slider section
@@ -94,7 +96,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
         SizedBox(height: Dimensions.height30),
-        // List of Recommmended Food Items
+        // List of Recommended Food Items
         GetBuilder<RecommendedProductController>(builder: (recommendedProduct) {
           return !recommendedProduct.isLoaded
               ? const CircularProgressIndicator()
@@ -109,6 +111,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         return GestureDetector(
                           onTap: () {
                             Get.toNamed(
+
                                 RouteHelper.getRecommendedFoodPage(index));
                           },
                           child: Container(

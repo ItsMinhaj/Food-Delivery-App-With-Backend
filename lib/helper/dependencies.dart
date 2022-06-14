@@ -1,5 +1,6 @@
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
+import 'package:food_delivery/controllers/recommended_cart_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/data/api/api_client.dart';
 import 'package:food_delivery/data/repository/cart_repo.dart';
@@ -23,5 +24,8 @@ class Dependency {
     Get.lazyPut(
         () => RecommendedProductController(recommendedProductRepo: Get.find()));
     Get.lazyPut(() => CartController(cartRepo: Get.find()));
+
+    Get.lazyPut(() => RecommendedCartController());
+
   }
 }
