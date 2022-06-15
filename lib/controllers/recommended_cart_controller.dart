@@ -13,7 +13,6 @@ class RecommendedCartController extends GetxController {
   addToCart(ProductsModel products) {
     recommendedCartItems.add(products);
     totalQuantity.value = totalQuantity.value + numberOfItems.value;
-
     numberOfItems.value = 0;
 
     // Get.snackbar("Cart List", "Item added to cart");

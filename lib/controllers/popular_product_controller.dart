@@ -24,7 +24,7 @@ class PopularProductController extends GetxController {
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
-    debugPrint("Response" + response.body.toString());
+
     if (response.statusCode == 200) {
       debugPrint("got data ");
       _popularProductList = [];
