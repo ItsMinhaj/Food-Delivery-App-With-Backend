@@ -6,6 +6,7 @@ class RecommendedCartController extends GetxController {
   var recommendedCartItems = <CartListItemModel>[].obs;
   var numberOfItems = 0.obs;
   var totalQuantity = 0.obs;
+  var totalAmount = 0.obs;
 
   addQuantity() {
     numberOfItems.value++;
@@ -37,6 +38,9 @@ class RecommendedCartController extends GetxController {
     }
 
     totalQuantity.value = totalQuantity.value + numberOfItems.value;
+
+    totalAmount.value =
+        totalAmount.value + ((products.price!) * numberOfItems.value);
     numberOfItems.value = 0;
 
     // Get.snackbar("Cart List", "Item added to cart");
