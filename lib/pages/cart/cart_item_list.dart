@@ -15,6 +15,9 @@ class CartItemListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black54,
+        ),
         title: const Text(
           "Cart Item Lists",
           style: TextStyle(color: Colors.black54),
@@ -53,12 +56,16 @@ class CartItemListScreen extends StatelessWidget {
               },
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              Text("Total Quantity: 0000"),
-              Text("Total Amount: 0000"),
-            ],
+          Padding(
+            padding: EdgeInsets.all(Dimensions.height10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                    "Total Quantity: ${cartController.totalQuantity.value.toString()}"),
+                Text("Total Amount: " + cartController.totalAmount.toString()),
+              ],
+            ),
           ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
