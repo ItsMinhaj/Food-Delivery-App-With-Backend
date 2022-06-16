@@ -44,6 +44,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<RecommendedCartController>().initQuantity();
 
     return Column(
       children: [
@@ -111,7 +112,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         return GestureDetector(
                           onTap: () {
                             Get.toNamed(
-
                                 RouteHelper.getRecommendedFoodPage(index));
                           },
                           child: Container(

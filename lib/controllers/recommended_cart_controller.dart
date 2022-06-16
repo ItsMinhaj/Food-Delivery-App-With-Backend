@@ -1,22 +1,11 @@
+import 'package:food_delivery/model/cart_list_item_model.dart';
 import 'package:food_delivery/model/popular_product_model.dart';
 import 'package:get/get.dart';
 
 class RecommendedCartController extends GetxController {
-  var recommendedCartItems = <ProductsModel>[].obs;
+  var recommendedCartItems = <CartListItemModel>[].obs;
   var numberOfItems = 0.obs;
   var totalQuantity = 0.obs;
-
-  double get totalAmount =>
-      recommendedCartItems.fold(0, (sum, item) => sum + item.price!);
-  //int get numberOfItems => recommendedCartItems.length;
-
-  addToCart(ProductsModel products) {
-    recommendedCartItems.add(products);
-    totalQuantity.value = totalQuantity.value + numberOfItems.value;
-    numberOfItems.value = 0;
-
-    // Get.snackbar("Cart List", "Item added to cart");
-  }
 
   addQuantity() {
     numberOfItems.value++;
@@ -28,5 +17,32 @@ class RecommendedCartController extends GetxController {
     } else {
       numberOfItems.value--;
     }
+  }
+
+  addToCart(ProductsModel products) {
+    final index = recommendedCartItems
+        .indexWhere((element) => element.product == products);
+
+    // if recommendedCartItem index is zero or greater than zero that means product already in the list,
+    // so we will only update the quantity
+    if (index >= 0) {
+      recommendedCartItems[index] = CartListItemModel(
+          product: products,
+          quantity: numberOfItems.value +
+              recommendedCartItems[index]
+                  .quantity); // previous item + current items
+    } else {
+      recommendedCartItems.add(
+          CartListItemModel(product: products, quantity: numberOfItems.value));
+    }
+
+    totalQuantity.value = totalQuantity.value + numberOfItems.value;
+    numberOfItems.value = 0;
+
+    // Get.snackbar("Cart List", "Item added to cart");
+  }
+
+  initQuantity() {
+    numberOfItems.value = 0;
   }
 }
