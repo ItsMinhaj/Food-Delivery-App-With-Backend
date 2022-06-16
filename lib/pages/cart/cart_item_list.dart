@@ -29,41 +29,64 @@ class CartItemListScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: cartController.recommendedCartItems.length,
-              itemBuilder: (context, index) {
-                var cartImage =
-                    cartController.recommendedCartItems[index].product.img;
-                return Card(
-                  color: AppColors.mainColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.network(
-                          AppConstants.BASE_URL +
-                              AppConstants.UPLOAD_URI +
-                              cartImage!,
-                          width: 100,
-                        ),
-                        Text(
-                            "Quantity: ${cartController.recommendedCartItems[index].quantity}"),
-                      ],
+            child: Obx(() {
+              return ListView.builder(
+                itemCount: cartController.recommendedCartItems.length,
+                itemBuilder: (context, index) {
+                  var cartImage =
+                      cartController.recommendedCartItems[index].product.img;
+                  return Card(
+                    color: AppColors.mainColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.network(
+                            AppConstants.BASE_URL +
+                                AppConstants.UPLOAD_URI +
+                                cartImage!,
+                            width: Dimensions.width120 - Dimensions.width20,
+                            height: Dimensions.height100 - Dimensions.height20,
+                            fit: BoxFit.cover,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                  "Quantity: ${cartController.recommendedCartItems[index].quantity}"),
+                              SizedBox(height: Dimensions.height20),
+                              InkWell(
+                                onTap: () {
+                                  cartController.deleteCartItem(cartController
+                                      .recommendedCartItems[index]);
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  size: Dimensions.height20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              );
+            }),
           ),
           Padding(
             padding: EdgeInsets.all(Dimensions.height10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                    "Total Quantity: ${cartController.totalQuantity.value.toString()}"),
-                Text("Total Amount: " + cartController.totalAmount.toString()),
+                Obx(() {
+                  return Text(
+                      "Total Quantity: ${cartController.totalQuantity.value.toString()}");
+                }),
+                Obx(() {
+                  return Text("Total Amount: \$${cartController.totalAmount}");
+                }),
               ],
             ),
           ),

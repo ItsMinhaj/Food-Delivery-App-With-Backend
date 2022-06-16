@@ -46,6 +46,13 @@ class RecommendedCartController extends GetxController {
     // Get.snackbar("Cart List", "Item added to cart");
   }
 
+  deleteCartItem(CartListItemModel products) {
+    recommendedCartItems.remove(products);
+    totalQuantity.value = totalQuantity.value - products.quantity;
+    totalAmount.value =
+        totalAmount.value - ((products.product.price!) * numberOfItems.value);
+  }
+
   initQuantity() {
     numberOfItems.value = 0;
   }
