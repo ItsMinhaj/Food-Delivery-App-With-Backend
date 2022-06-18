@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/add_to_cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
-import 'package:food_delivery/controllers/recommended_cart_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/helper/dependencies.dart';
-import 'package:food_delivery/pages/cart/cart_item_list.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
 import 'package:get/get.dart';
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecommendedProductController>().getRecommendedProductList();
-    Get.find<RecommendedCartController>();
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

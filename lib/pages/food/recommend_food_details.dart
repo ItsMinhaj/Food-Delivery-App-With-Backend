@@ -2,7 +2,7 @@
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery/controllers/recommended_cart_controller.dart';
+import 'package:food_delivery/controllers/add_to_cart_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/pages/cart/cart_item_list.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
@@ -23,7 +23,7 @@ class RecommendFoodDetails extends StatelessWidget {
     var product =
         Get.find<RecommendedProductController>().recommendedProductList[pageId];
 
-    var cartController = Get.find<RecommendedCartController>();
+    var cartController = Get.find<AddToCartController>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -47,7 +47,7 @@ class RecommendFoodDetails extends StatelessWidget {
                 ),
                 Badge(
                   badgeContent:
-                      GetX<RecommendedCartController>(builder: (controller) {
+                      GetX<AddToCartController>(builder: (controller) {
                     return Text(controller.totalQuantity.toString(),
                         style: const TextStyle(color: Colors.white));
                   }),
@@ -112,7 +112,7 @@ class RecommendFoodDetails extends StatelessWidget {
                     iconColor: Colors.white,
                   ),
                 ),
-                GetX<RecommendedCartController>(builder: (controller) {
+                GetX<AddToCartController>(builder: (controller) {
                   return BigText(
                       text:
                           "\$ ${product.price}  X  ${controller.numberOfItems}",
@@ -179,7 +179,9 @@ class RecommendFoodDetails extends StatelessWidget {
                       child: Row(
                         children: [
                           BigText(
-                              text: "00 | Add to cart", color: Colors.white),
+                              text:
+                                  "\$${cartController.totalAmount} | Add to cart",
+                              color: Colors.white),
                         ],
                       ),
                     ),

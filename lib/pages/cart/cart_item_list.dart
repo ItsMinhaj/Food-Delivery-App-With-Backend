@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/controllers/recommended_cart_controller.dart';
+import 'package:food_delivery/controllers/add_to_cart_controller.dart';
 import 'package:food_delivery/utlis/colors.dart';
 import 'package:food_delivery/utlis/dimensions.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,7 @@ import '../../utlis/app_constants.dart';
 class CartItemListScreen extends StatelessWidget {
   CartItemListScreen({Key? key}) : super(key: key);
 
-  final RecommendedCartController cartController = Get.find();
+  final AddToCartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,9 @@ class CartItemListScreen extends StatelessWidget {
           Expanded(
             child: Obx(() {
               return ListView.builder(
-                itemCount: cartController.recommendedCartItems.length,
+                itemCount: cartController.cartItems.length,
                 itemBuilder: (context, index) {
-                  var cartImage =
-                      cartController.recommendedCartItems[index].product.img;
+                  var cartImage = cartController.cartItems[index].product.img;
                   return Card(
                     color: AppColors.mainColor,
                     child: Padding(
@@ -53,12 +52,12 @@ class CartItemListScreen extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                  "Quantity: ${cartController.recommendedCartItems[index].quantity}"),
+                                  "Quantity: ${cartController.cartItems[index].quantity}"),
                               SizedBox(height: Dimensions.height20),
                               InkWell(
                                 onTap: () {
-                                  cartController.deleteCartItem(cartController
-                                      .recommendedCartItems[index]);
+                                  cartController.deleteCartItem(
+                                      cartController.cartItems[index]);
                                 },
                                 child: Icon(
                                   Icons.delete,

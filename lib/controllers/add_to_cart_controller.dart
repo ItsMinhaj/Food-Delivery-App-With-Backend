@@ -2,17 +2,21 @@ import 'package:food_delivery/model/cart_list_item_model.dart';
 import 'package:food_delivery/model/popular_product_model.dart';
 import 'package:get/get.dart';
 
-class RecommendedCartController extends GetxController {
-  var recommendedCartItems = <CartListItemModel>[].obs;
+class AddToCartController extends GetxController {
+  var cartItems = <CartListItemModel>[].obs;
+
   var numberOfItems = 0.obs;
   var totalQuantity = 0.obs;
   var totalAmount = 0.obs;
 
   addQuantity() {
     numberOfItems.value++;
+    print("Add clicked");
   }
 
   removeQuantity() {
+    print("Remove clicked");
+
     if (numberOfItems.value < 1) {
       Get.snackbar("Cart", "you can't reduce more!");
     } else {
@@ -21,19 +25,20 @@ class RecommendedCartController extends GetxController {
   }
 
   addToCart(ProductsModel products) {
-    final index = recommendedCartItems
-        .indexWhere((element) => element.product == products);
+    print("Add To Cart Clicked");
+
+    final index =
+        cartItems.indexWhere((element) => element.product == products);
 
     // if recommendedCartItem index is zero or greater than zero that means product already in the list,
     // so we will only update the quantity
     if (index >= 0) {
-      recommendedCartItems[index] = CartListItemModel(
+      cartItems[index] = CartListItemModel(
           product: products,
           quantity: numberOfItems.value +
-              recommendedCartItems[index]
-                  .quantity); // previous item + current items
+              cartItems[index].quantity); // previous item + current items
     } else {
-      recommendedCartItems.add(
+      cartItems.add(
           CartListItemModel(product: products, quantity: numberOfItems.value));
     }
 
@@ -47,10 +52,10 @@ class RecommendedCartController extends GetxController {
   }
 
   deleteCartItem(CartListItemModel products) {
-    recommendedCartItems.remove(products);
+    cartItems.remove(products);
     totalQuantity.value = totalQuantity.value - products.quantity;
     totalAmount.value =
-        totalAmount.value - ((products.product.price!) * numberOfItems.value);
+        totalAmount.value - ((products.product.price!) * products.quantity);
   }
 
   initQuantity() {
