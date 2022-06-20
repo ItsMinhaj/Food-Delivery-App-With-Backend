@@ -11,12 +11,9 @@ class AddToCartController extends GetxController {
 
   addQuantity() {
     numberOfItems.value++;
-    print("Add clicked");
   }
 
   removeQuantity() {
-    print("Remove clicked");
-
     if (numberOfItems.value < 1) {
       Get.snackbar("Cart", "you can't reduce more!");
     } else {
@@ -25,8 +22,6 @@ class AddToCartController extends GetxController {
   }
 
   addToCart(ProductsModel products) {
-    print("Add To Cart Clicked");
-
     final index =
         cartItems.indexWhere((element) => element.product == products);
 

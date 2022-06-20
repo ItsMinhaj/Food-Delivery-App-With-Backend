@@ -3,6 +3,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/add_to_cart_controller.dart';
+import 'package:food_delivery/controllers/favorite_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/pages/cart/cart_item_list.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
@@ -22,8 +23,8 @@ class RecommendFoodDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<RecommendedProductController>().recommendedProductList[pageId];
-
     var cartController = Get.find<AddToCartController>();
+    var favController = Get.find<FavoriteController>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -45,22 +46,36 @@ class RecommendFoodDetails extends StatelessWidget {
                     icon: Icons.clear,
                   ),
                 ),
-                Badge(
-                  badgeContent:
-                      GetX<AddToCartController>(builder: (controller) {
-                    return Text(controller.totalQuantity.toString(),
-                        style: const TextStyle(color: Colors.white));
-                  }),
-                  child: GestureDetector(
-                      onTap: () {
-                        Get.to(CartItemListScreen());
-                      },
-                      child: const AppIcon(icon: Icons.shopping_cart_outlined)),
-                ),
+                Row(
+                  children: [
+                    // Favortie Icon
+                    Badge(
+                        badgeContent:
+                            GetX<FavoriteController>(builder: (favController) {
+                          return Text(favController.numberOfItems.toString());
+                        }),
+                        child: const AppIcon(icon: Icons.favorite)),
+                    SizedBox(width: Dimensions.width20),
+                    // Cart Icon
+                    Badge(
+                      badgeContent:
+                          GetX<AddToCartController>(builder: (controller) {
+                        return Text(controller.totalQuantity.toString(),
+                            style: const TextStyle(color: Colors.white));
+                      }),
+                      child: GestureDetector(
+                          onTap: () {
+                            Get.to(CartItemListScreen());
+                          },
+                          child: const AppIcon(
+                              icon: Icons.shopping_cart_outlined)),
+                    ),
+                  ],
+                )
               ],
             ),
             bottom: PreferredSize(
-                // Header Icon section
+                // Header  section
                 child: Container(
                   padding: EdgeInsets.only(bottom: Dimensions.height15 / 3),
                   width: double.maxFinite,
@@ -102,6 +117,7 @@ class RecommendFoodDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Remove quantity
                 GestureDetector(
                   onTap: () {
                     cartController.removeQuantity();
@@ -118,6 +134,7 @@ class RecommendFoodDetails extends StatelessWidget {
                           "\$ ${product.price}  X  ${controller.numberOfItems}",
                       size: Dimensions.text26);
                 }),
+                // Add Quantity
                 GestureDetector(
                   onTap: () {
                     cartController.addQuantity();
@@ -157,7 +174,18 @@ class RecommendFoodDetails extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.favorite, color: AppColors.mainColor),
+                        InkWell(
+                          onTap: () {
+                            favController.addToFavitem(product);
+                          },
+                          child:
+                              GetX<FavoriteController>(builder: (controller) {
+                            return Icon(Icons.favorite,
+                                color: controller.isFavorite.value
+                                    ? Colors.red
+                                    : Colors.grey);
+                          }),
+                        ),
                       ],
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'package:food_delivery/controllers/add_to_cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/helper/dependencies.dart';
+import 'package:food_delivery/pages/home/home_page.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
 import 'package:get/get.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: RouteHelper.initail,
       getPages: RouteHelper.routes,
-      home: const MainFoodPage(),
+      home: const HomePage(),
     );
   }
 }
