@@ -6,6 +6,7 @@ import 'package:food_delivery/controllers/add_to_cart_controller.dart';
 import 'package:food_delivery/controllers/favorite_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/pages/cart/cart_item_list.dart';
+import 'package:food_delivery/pages/favorite/favortie_item_page.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
 import 'package:food_delivery/utlis/app_constants.dart';
 import 'package:food_delivery/utlis/colors.dart';
@@ -52,10 +53,17 @@ class RecommendFoodDetails extends StatelessWidget {
                     Badge(
                         badgeContent:
                             GetX<FavoriteController>(builder: (favController) {
-                          return Text(favController.numberOfItems.toString());
+                          return Text(
+                            favController.numberOfItems.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          );
                         }),
-                        child: const AppIcon(icon: Icons.favorite)),
-                    SizedBox(width: Dimensions.width20),
+                        child: GestureDetector(
+                            onTap: () {
+                              Get.to(FavoriteItemPage());
+                            },
+                            child: const AppIcon(icon: Icons.favorite))),
+                    SizedBox(width: Dimensions.width30),
                     // Cart Icon
                     Badge(
                       badgeContent:

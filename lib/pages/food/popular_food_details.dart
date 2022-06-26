@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/add_to_cart_controller.dart';
 import 'package:food_delivery/controllers/unused_cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
+import 'package:food_delivery/pages/cart/cart_item_list.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/utlis/app_constants.dart';
 import 'package:food_delivery/utlis/dimensions.dart';
@@ -49,7 +50,7 @@ class PopularFoodDetails extends StatelessWidget {
           ),
           // App Icon
           Positioned(
-            top: Dimensions.height30,
+            top: Dimensions.height30 + Dimensions.height15,
             left: Dimensions.width20,
             right: Dimensions.width20,
             child: Row(
@@ -66,11 +67,16 @@ class PopularFoodDetails extends StatelessWidget {
                       GetX<AddToCartController>(builder: (cartController) {
                     return Text(cartController.totalQuantity.toString());
                   }),
-                  child: const AppIcon(
-                    icon: Icons.shopping_cart,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(CartItemListScreen());
+                    },
+                    child: const AppIcon(
+                      icon: Icons.shopping_cart,
 
-                    // iconColor: Colors.transparent,
-                    //  backgroundColor: Colors.red,
+                      // iconColor: Colors.transparent,
+                      //  backgroundColor: Colors.red,
+                    ),
                   ),
                 ),
               ],

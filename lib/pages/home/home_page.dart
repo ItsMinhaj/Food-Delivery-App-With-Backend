@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/pages/cart/cart_item_list.dart';
+import 'package:food_delivery/pages/favorite/favortie_item_page.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/utlis/colors.dart';
 
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   var pages = [
     const MainFoodPage(),
-    const SizedBox(child: Center(child: Text("Favortie Page"))),
+    FavoriteItemPage(),
     CartItemListScreen(),
     const SizedBox(child: Center(child: Text("Profile Page"))),
   ];
